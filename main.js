@@ -56,7 +56,6 @@ let card16Bot = document.getElementById("card16Bot");
 let startButtonsTop = document.getElementById("startButtonsTop");
 let startButtonsBot = document.getElementById("startButtonsBot");
 // Buttons in start bars
-const startPlayerTopBut = document.getElementById("startPlayerTopBut");
 const startPlayerBotBut = document.getElementById("startPlayerBotBut");
 const resetBoardTop = document.getElementById("resetBoardTop");
 const resetBoardBot = document.getElementById("resetBoardBot");
@@ -435,7 +434,6 @@ const startPlayerBot = function() {
 };
 
 const addStartListeners = function() {
-    startPlayerTopBut.addEventListener("click", startPlayerTop);
     startPlayerBotBut.addEventListener("click", startPlayerBot);
 };
 

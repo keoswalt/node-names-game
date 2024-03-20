@@ -367,3 +367,33 @@ button[data-color="black"] {
     align-items: center;
     justify-content: center;
 }
+
+/* QR Codes */
+
+.qrCodes {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding-block: 2rem;
+}
+
+.qrWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.qrWrapper p {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.returnHome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block: 1rem;
+}
