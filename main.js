@@ -79,7 +79,6 @@ const yesButton = document.getElementById("yesButton");
 const noButton = document.getElementById("noButton");
 const shadow = document.querySelector(".shadow");
 const dialog = document.querySelector(".dialog");
-const dialogInverted = document.querySelector(".dialogInverted");
 
 // Game end screen button
 const restart = document.getElementById("restart");
@@ -161,21 +160,48 @@ const addTurn = function (player) {
     return player + 1;
   };
   
-  const fillDot = function (direction, turn) {
+  const fillDotPast = function (direction, turn) {
     let target = direction[turn];
     target.style.background = "var(--color-dark-100)";
   };
 
+  const fillDotCurrent = function (direction, turn) {
+    let target = direction[turn];
+    target.style.background = "var(--color-yellow)";
+  };
+
+  const invertDialog = function() {
+    dialog.style.transform = "translate(-50%, -50%) rotate(180deg)";
+  }
+
+  const resetDialog = function() {
+    dialog.style.transform = "translate(-50%, -50%)"
+  }
+
+  const startTurnTop = function() {
+    let turn = turnsPlayerTop;
+    fillDotCurrent(progressDotsTop, turn);
+  }
+
+  const startTurnBot = function() {
+    let turn = turnsPlayerBot;
+    fillDotCurrent(progressDotsBot, turn);
+  }
+
 const endTurnTop = function() {
     let turn = turnsPlayerTop;
-    fillDot(progressDotsTop, turn);
+    fillDotPast(progressDotsTop, turn);
     turnsPlayerTop = addTurn(turnsPlayerTop);
+    resetDialog();
+    startTurnBot();
 };
 
 const endTurnBot = function() {
     let turn = turnsPlayerBot;
-    fillDot(progressDotsBot, turn);
+    fillDotPast(progressDotsBot, turn);
     turnsPlayerBot = addTurn(turnsPlayerBot);
+    invertDialog();
+    startTurnTop();
 };
 
 endPlayerTop.addEventListener("click", endTurnTop);
@@ -185,15 +211,10 @@ endPlayerBot.addEventListener("click", endTurnBot);
 
 // CARD CLICK FUNCTIONS *********************************************
 
-const openDialogTop = function() {
+const openDialog = function() {
   shadow.style.display = "block";
-  dialogInverted.style.display = "flex";
+  dialog.style.display = "flex";
 };
-
-const openDialogBot = function() {
-    shadow.style.display = "block";
-    dialog.style.display = "flex";
-  };
 
 const closeDialog = function() {
   shadow.style.display = "none";
@@ -228,14 +249,14 @@ const wrongAnswerTop = function() {
 
 const cardClickTop = function(event) {
   let selected = event.target;
-  openDialogTop();
+  openDialog();
   yesButton.addEventListener("click", () => rightAnswerTop(selected));
   noButton.addEventListener("click", () => wrongAnswerTop());
 };
 
 const cardClickBot = function(event) {
     let selected = event.target;
-    openDialogBot();
+    openDialog();
     yesButton.addEventListener("click", () => rightAnswerBot(selected));
     noButton.addEventListener("click", () => wrongAnswerBot());
   };
